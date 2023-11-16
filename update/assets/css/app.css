@@ -1,0 +1,125 @@
+body {
+    font-family: 'Lexend Deca', sans-serif;
+    background-color: white;
+    margin: 0px;
+    overflow: auto;
+    max-width: 800px; 
+    margin: 0 auto;
+}
+.show {
+    display: flex !important;
+}
+button#btnFullScreen {
+    background: transparent;
+    color: white;
+}
+.swiper-slide {
+    display: flex;
+    justify-content: center;
+    min-width: 180px !important;
+}
+button.btn.addProd svg {
+    font-size: 1.2rem;
+    margin-right: 10px;
+}
+button.btn.addProd {
+    background: blue;
+    color: white;
+    padding: 5px 25px 10px;
+    border-radius: 16px;
+    margin: 0 auto 30px;
+    display: block;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    height: 60px;
+    max-width: 435px;
+    font-weight: bold;
+}
+
+button {
+    background:transparent;
+    border:0;
+}
+.controls button svg {
+    color: black;
+    margin: 20px;
+}
+div#cart .controls {
+    background: white;
+}
+
+.controls button {
+    /* background: red; */
+   
+    margin: 10px;
+    color: black;
+    height: 50px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+
+.controls button:first-child {
+    justify-content: flex-start;
+   
+}
+.controls button:last-child {
+    justify-content: flex-end;
+ 
+}
+.categories {
+    margin: 20px auto;
+}
+.produto {
+    margin: 10px auto;
+}
+h1 {
+    margin: 10px auto;
+    font-size: 1.0rem;
+    font-weight: 300;
+    display: block;
+    text-align: center;
+}
+h2 {
+    padding: 0px 20px;
+    font-size: 2.5rem;
+    width: 300px;
+    color: black;
+    margin: 10px 0px 15px;
+    line-height: 1.1;
+}
+.controls {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+ 
+.msgLoad img:first-child {
+    width:90px;
+    margin: 50px auto 0;
+}
+.msgLoad p {
+    color: #9f9f9f;
+}
+.msgLoad {
+    position: fixed;
+    background: #f1f2f3;
+    color: #ff253a;
+    display: none;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    align-items: center;
+}
+div#msgLoad p {
+    color: #8b9398;
+}
+
+.msgLoad img {
+    max-width: 140px;
+}

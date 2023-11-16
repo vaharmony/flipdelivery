@@ -1,0 +1,1433 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <!-- <meta name="theme-color" content="#FB6E3B"> -->
+    <title>Editar Cardápio Digital</title>
+    <link rel="shortcut icon" href="favico.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/app.css">  
+    <link rel="stylesheet" href="assets/css/validation.css">  
+    <link rel="stylesheet" href="assets/css/inputs.css">  
+    <link rel="stylesheet" href="assets/css/cart.css">  
+    <link rel="stylesheet" href="assets/components/user/user.css">  
+    <link rel="stylesheet" href="assets/components/menu/menu.css">  
+    <link rel="stylesheet" href="assets/components/modal/modal.css">  
+    <link rel="stylesheet" href="assets/components/search/search.css">  
+    <link rel="stylesheet" href="assets/components/categorias/categorias.css">  
+    <link rel="stylesheet" href="assets/components/product/product.css">  
+    <link rel="stylesheet" href="assets/components/mediasocial/mediasocial.css">  
+    <link rel="stylesheet" href="assets/components/swiper/swiper.css">  
+    <link rel="stylesheet" href="assets/components/banners/banners.css">  
+    <link rel="stylesheet" href="assets/components/checkout/checkout.css">   
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;700;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+  <!-- <button id="deleteOrder">Delete Order</button>  -->
+  <div id="list"></div>
+   
+  <div class="user" id="user"> 
+  </div>
+  <div class="cart" id="cart">  </div>
+  <div class="checkout" id="checkout">
+    <div class="controls">  
+      <button onclick="closeCheckout()"> <i class="fa-solid fa-chevron-left"></i></button>
+      <button onclick="closeCheckout()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="content">
+      <h2>Finalizar Pedido </h2>
+    </div>
+    <form id="checkoutform" class="checkoutform" >
+      <div>
+        <label style="
+          width: 100%;
+          height: auto;
+          ">
+        Forma de retirada:
+        </label> 
+        <div class="mylabel select">
+          <label>
+          <img src="assets/images/inputs/archive.png" style="margin-top: 16px;">
+          </label>
+          <select onchange="formaRetirada()" id="selectCheckout">
+            <option value="1">Selecione a forma de retirada</option>
+            <option value="balcao">Viagem</option>
+            <option value="mesa">Mesa</option>
+          </select>
+        </div>
+        <div id="setMesa" class="mylabel"  style="display:none">
+          <label style="height:48px;"> 
+          <img src="assets/images/inputs/mesa.png" style="margin-top: 16px;">  
+          </label>
+          <input id="inputMesa"  type="number" placeholder="Digite o numero da mesa">
+        </div>
+        <div id="whatsappId"  style="display: none; ">
+          <!-- <span>Receba notificação via whatsapp </span> -->
+          <div id="setPhone" class="mylabel" >
+            <label style="height:48px;">  
+            <img src="assets/images/inputs/whats.png" style="margin-top: 16px;">  
+            </label>
+            <input id="inputMesa"  type="number" placeholder="Whatsapp para notificação">
+          </div>
+        </div>
+      </div>
+      <div style="position: relative;">
+        <label> 
+        Observações do Pedido:
+        </label>
+        <textarea id="areaObs" placeholder="Digite observações do seu pedido"></textarea>
+      </div>
+      <div id="mgg"></div>
+      <div class="total" id="totalfinesh"> 
+        <button type="submit" id="submitCheck">ENVIAR MEU PEDIDO </button>
+      </div>
+  </div>
+  </form>
+  </div>
+  <div class="menu">
+    <ul>
+      <!-- <button >+</button>  -->
+
+      <form class="updateMenu" >
+        <button  > 
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Salvar</span>
+        </button> 
+      </form>
+
+      <!-- <button id="cartPreview"><img src="assets/images/shopping-cart.png" alt="" srcset=""></button> -->
+      <!-- <button><img src="assets/images/menu.png" alt="" srcset=""></button> -->
+    </ul>
+  </div>
+  
+  <div class="search">
+    <h2 >Adicione, altere ou remova Produtos</h2>
+    <form>
+      <!--           
+        <div class="mylabel">
+          <label>  <img src="assets/images/inputs/user.png" style="width: 16px;">
+          </label>
+          <input id="userName" style="margin-bottom: 5px !important;" placeholder="Digite seu nome" type="text" required> 
+        </div> -->
+      <div class="mylabel">
+        <label style="
+          top: 0px;
+          height: 46px;
+          ">  
+        <img src="assets/images/search.png" alt="">
+        </label>
+        <input  onclick="getSearch(event)" type="text" placeholder="Buscar itens...">
+        <!-- <i class="fa-solid fa-arrow-right"></i> -->
+      </div>
+      <div id="contentSearch" class="contentSearch">
+        <!-- CONTROLES -->
+        <div class="controls">
+          <button onclick="getSearch(event)">
+            <svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg="">
+              <path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path>
+            </svg>
+            <!-- <i class="fa-solid fa-chevron-left"></i> Font Awesome fontawesome.com -->
+          </button>
+          <button onclick="getSearch(event)">
+            <svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg="">
+              <path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path>
+            </svg>
+            <!-- <i class="fa-solid fa-xmark"></i> Font Awesome fontawesome.com -->
+          </button>
+        </div>
+        <div class="mylabel" style="position: inherit;width: 100%;margin-top: 50px;margin-bottom: 10px;margin-left: 10px;"> 
+          <label>
+          <img src="assets/images/search.png" alt=""> 
+          </label>
+          <input id="serchInput" type="text" placeholder="Buscar itens..."> 
+        </div>
+      </div>
+    </form>
+    <div id="searchResult"></div>
+  </div>
+  <div style="display:none;" class="banners">
+    <div class="swiper mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide">
+          <img src="assets/images/bannercamarao.png" alt="" >
+        </div>
+        <div class="swiper-slide">
+          <img src="assets/images/bannerdrinks.png" alt="" >
+        </div>
+        <div class="swiper-slide">
+          <img src="assets/images/bannercerveja.png" alt="" >
+        </div>
+        <div class="swiper-slide">
+          <img src="assets/images/bannertapioca.png" alt="" >
+        </div>
+        <div class="swiper-slide">
+          <img src="assets/images/bannerpanqueca.png" alt="" >
+        </div>''
+      </div>
+      <div class="swiper-pagination"></div>
+    </div>
+  </div>
+  <div id="categories" class="categories"> </div>
+
+  <!-- MODAL -->
+  <div class="modal-container" id="modalcontainer">
+    <div class="modal">
+      <div class="controls"> 
+        <button onclick="modalToggle()"><svg class="svg-inline--fa fa-chevron-left" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="chevron-left" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l192 192c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 278.6 86.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-192 192z"></path></svg><!-- <i class="fa-solid fa-chevron-left"></i> Font Awesome fontawesome.com --></button>
+        <button onclick="modalToggle()"><svg class="svg-inline--fa fa-xmark" aria-hidden="true" focusable="false" data-prefix="fas" data-icon="xmark" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512" data-fa-i2svg=""><path fill="currentColor" d="M310.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L160 210.7 54.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L114.7 256 9.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 301.3 265.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L205.3 256 310.6 150.6z"></path></svg><!-- <i class="fa-solid fa-xmark"></i> Font Awesome fontawesome.com --></button>  
+    </div>
+
+      <div class="content-text">
+        <h2>Editar produto.</h2>
+      </div>
+
+      <form>
+        
+        <label style="  width: 100%; height: auto; ">
+          Nome do Produto:
+        </label>
+
+        <div class="mylabel">
+          <label style="height:48px;">
+            <i class="fa-brands fa-product-hunt"></i>   
+           </label>
+          <input name="name" id="m-nome" type="text" required />
+        </div> 
+ 
+    
+        <label for="m-price">Preço</label>
+         
+        <div class="mylabel">
+          <label style="height:48px;">    
+            <i class="fa-solid fa-dollar-sign"></i><!-- <img src="assets/images/inputs/whats.png" style="margin-top: 16px;">   -->  </label>
+           <input  name="price" id="m-price" type="number" step="0.01"   required />
+
+
+
+        </div>  
+
+        <button id="btnSalvar">ok</button>
+      </form>
+    </div>
+  </div>
+
+  <div id="msgLoad" class="msgLoad">
+    <img src="assets/images/logo.png">
+    <h3>Aguarde </h3>
+    <p>Estamos atualizando seu cardápio!</p>
+    <img src="assets/images/loading.gif">
+    <!-- <button>Cancelar</button>  -->
+  </div>
+  <div id="msgLoading" class="msgLoad">
+    <img src="assets/images/logo.png">
+    <h3>Aguarde </h3>
+    <p>atualizando seu cardápio!</p>
+    <img src="assets/images/loading.gif">
+    <!-- <button>Cancelar</button>  -->
+  </div>
+</div>
+</body>
+    
+  
+    </html>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+ <script src="assets/components/api/apidb.js"></script>
+ <script src="assets/js/all.js"></script>
+ <script src="assets/components/relogio/relogio.js"></script>
+ <script src="assets/components/checkout/animatedCheckOut.js"></script>
+ <script src="assets/components/checkout/checkout.js"></script>
+ <script src="assets/components/categorias/categorias.js"></script>
+ 
+ <script src="assets/components/api/api-categorias.js"></script>
+ <script src="assets/components/orders/ordermore.js"></script>
+
+ <script src="assets/components/search/search.js"></script>
+ <script src="assets/js/validation.js"></script>
+ <script src="assets/js/cart.js"></script>
+ <script src="assets/components/swiper/swiper.js"></script>
+ <script src="assets/js/app.js"></script>
+ <script src="assets/components/modal/modal.js"></script>
+
+
+ <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+<script>
+   var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 3,
+        spaceBetween: 30,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+      });
+</script>
+ <script type="module">
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyDuvA_WF4pn-jl0VNyTqBCAXeblEBrO2Tw",
+  authDomain: "xara-c4426.firebaseapp.com",
+  projectId: "xara-c4426",
+  storageBucket: "xara-c4426.appspot.com",
+  messagingSenderId: "479792460856",
+  appId: "1:479792460856:web:b9d4b1edbba6262ec6a2cd"
+  };  
+
+ // Initialize Firebase
+ firebase.initializeApp(firebaseConfig); 
+
+ // Initialize Cloud Firestore and get a reference to the service
+ const db = firebase.firestore();
+
+
+ let btnSubmit=document.getElementById('submitCheck')
+ let list = document.getElementById("notifications") 
+ let form = document.querySelector(".checkoutform") 
+ let formupdateMenu = document.querySelector(".updateMenu") 
+ let horaAtual=relogio()
+ let horaReplace=horaAtual.replace(/[^0-9]/g, '')
+ let databaseDeliveryArr=[]
+ let databaseMesas=[] 
+ let entregaPed=false
+
+
+
+ //UPDATE CARDAPIO 
+formupdateMenu.addEventListener('submit', function(e){
+  e.preventDefault()  
+  msgLoadContainer.style.cssText='display:flex;'
+
+  // db.collection('cardapio').doc('cardapioatual').set({dataProd:data})
+  db.collection('cardapio').doc('cardapioatual').set( {dataProd:  
+    [
+    {
+        "key": "beber",
+        "itens": [  {
+                "id": generateID(),  
+                "name": "Whisky",
+                "products": [
+                    {
+                        "quantidade": 0,
+                        "name": "Whisky Cavalo Branco",
+                        "id":generateID(),
+                                                "img": "assets/images/produtos/whiskycavalobranco.png",
+                        "price": "125.00"
+                    },
+                    {
+                        "price": "135.00",
+                        "img": "assets/images/produtos/whiskredlabel.png",
+                        "name": "Whisky Red Label 1L",
+                        "id":generateID(),
+                          "quantidade": 0
+                    },
+                    {
+                        "img": "assets/images/produtos/whiskblacklabel.png",
+                        "price": "220.00",
+                        "quantidade": 0,
+                        "name": "Whisky Black Label",
+                        "id":generateID(),
+                                         },
+                    {
+                        "img": "assets/images/produtos/whiskjackdaniels.png",
+                        "price": 160,
+                        "name": "Whisky Jack Daniels",
+                        "id":generateID(),
+                                                "quantidade": 0
+                    },
+                    {
+                        "img": "assets/images/produtos/Whiskyballantines.png",
+                        "quantidade": 0,
+                        "price": 120,
+                        "name": "Whisky Ballantines",
+                        "id":generateID(),
+                                         },
+                    {
+                        "img": "assets/images/produtos/whiskybuchanans.png",
+                        "quantidade": 0,
+                        "price": 200,
+                        "name": "Whisky Buchanans",
+                        "id":generateID(),
+                                         },
+                    {
+                        "id":generateID(),
+                                                "name": "Whisky Gold Label",
+                        "img": "assets/images/produtos/whiskygoldlabel.png",
+                        "price": 250,
+                        "quantidade": 0
+                    },
+                    {
+                        "id":generateID(),
+                                                "name": "Whisky Passport",
+                        "img": "assets/images/produtos/whiskpassport.png",
+                        "price": "55.00",
+                        "quantidade": 0
+                    },
+                    {
+                        "price": 52,
+                        "id": "73",
+                        "quantidade": 0,
+                        "name": "Whisky Passport Mel",
+                        "img": "assets/images/produtos/whiskypassportmel.png"
+                    },
+                    {
+                        "name": "Whisky Chivas Regal",
+                        "quantidade": 0,
+                        "img": "assets/images/produtos/whiskychivasregal.png",
+                        "id": "629",
+                        "price": 170
+                    },
+                    {
+                        "id": "68",
+                        "quantidade": 0,
+                        "price": 25,
+                        "name": "Whisky Famuous One",
+                        "img": "assets/images/produtos/whiskfamuousonel.png"
+                    },
+                    {
+                        "quantidade": 0,
+                        "img": "assets/images/produtos/whiskoldstar.png",
+                        "name": "Whisky Old Star",
+                        "price": 20,
+                        "id": "804"
+                    },
+                    {
+                        "id": "437",
+                        "quantidade": 0,
+                        "name": "Whisky Black Stone",
+                        "img": "assets/images/produtos/whiskblackstone.png",
+                        "price": 35
+                    },
+                    {
+                        "img": "assets/images/produtos/wiskgold.png",
+                        "name": "Whisky Master Gold",
+                        "quantidade": 0,
+                        "price": 25,
+                        "id": "656"
+                    }
+                ]
+              },{
+                
+                  id:generateID(),
+
+                  name:'Gin',
+                  products:[{
+                      id:generateID(),
+
+                      name:'Gin Tanqueray', 
+                      img:'assets/images/produtos/gin.png',  
+                      price:199,
+                      quantidade:0,
+                  },{
+                      id:generateID(),
+
+                      name:'Gin Rose', 
+                      img:'assets/images/produtos/ginrose.png',  
+                      price:37,
+                      quantidade:0,
+                  },{
+                      id:generateID(),
+
+                      name:'Gin Flowers', 
+                      img:'assets/images/produtos/ginflowers.png',  
+                      price:9.5,
+                      quantidade:0,
+                  }]      
+              
+              
+              } ,{
+                "id": generateID(),
+                "name": "Vodkas",
+                "products": [
+                    {
+                        "price": 13,
+                        "id": generateID(),                      
+                        "img": "assets/images/produtos/smirnoffice.png",
+                        "name": "Vodka Smirnoff Ice Long Neck",
+                        "quantidade": 0
+                    },
+                    {
+                        "price": 9.5,
+                        "id": generateID(),                      "name": "Vodka Smirnorff Lata",
+                        "img": "assets/images/produtos/smirnofficelata.png",
+                        "quantidade": 0
+                    },
+                    {
+                        "quantidade": 0,
+                        "name": "Vodka Smirnoff 1L",
+                        "id": generateID(),                      "price": 49,
+                        "img": "assets/images/produtos/vodkasmirnoff1l.png"
+                    },
+                    {
+                        "img": "assets/images/produtos/ousadia.png",
+                        "id": generateID(),                     "price": 7.5,
+                        "quantidade": 0,
+                        "name": "Vodka Ousadia"
+                    },
+                    {
+                        "img": "assets/images/produtos/smirnoffsabor.png",
+                        "quantidade": 0,
+                        "price": 58,
+                        "name": "Vodka Smirnorff Sabor",
+                        "id": generateID(),                 },
+                    {
+                        "id": generateID(),                      "name": "Vodka Askov",
+                        "img": "assets/images/produtos/askov.png",
+                        "price": 18,
+                        "quantidade": 0
+                    },
+                    {
+                        "img": "assets/images/produtos/vodkaaskovsabor.png",
+                        "id": generateID(),                      
+                        "price": 18,
+                        "name": "Vodka Askov Sabor 1L",
+                        "quantidade": 0
+                    }
+                ]
+              },{  
+            id:generateID(),
+
+            name:'Vinhos',
+            products:[{
+                id:generateID(),
+
+                name:'Vinho Santome', 
+                img:'assets/images/produtos/56.png',  
+                price:19,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Vinho Cantinho do Vale', 
+                img:'assets/images/produtos/57.png',  
+                price:6.5,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Vinho Catuaba Selvagem', 
+                img:'assets/images/produtos/vinhocatuaba.png',  
+                price:18,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Vinho Garrafa 1 L', 
+                img:'assets/images/produtos/vinhogarrafa1l.png',  
+                price:25,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Vinho Draft', 
+                img:'assets/images/produtos/vinhodraft.png',  
+                price:15,
+                quantidade:0,
+            }]    
+     
+        },{  
+            id:generateID(),
+
+            name:'Energéticos',
+            products:[{
+                id:generateID(),
+
+                name:'Energético Red Bull 250ml', 
+                img:'assets/images/produtos/energeticoredbull.png',  
+                price:12,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Energético Monster 473ml', 
+                img:'assets/images/produtos/energeticomonster.png',  
+                price:13,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Energético 2L', 
+                img:'assets/images/produtos/energetico2l.png',  
+                price:8.5,
+                quantidade:0,
+            }]    
+     
+        },{  
+            id:generateID(),
+
+            name:'Águas',
+            products:[{
+                id:generateID(),
+
+                name:'Água sem Gás 500ml', 
+                img:'assets/images/produtos/aguasemgas500ml.png',  
+                price:3,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Água sem Gás 1 L', 
+                img:'assets/images/produtos/aguasemgas1l.png',  
+                price:6,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Água com Gás 500ml', 
+                img:'assets/images/produtos/aguacomgas500ml.png',  
+                price:4,
+                quantidade:0,
+            }]    
+     
+        
+     
+    },{
+                "id": generateID(),  
+                "name": "Refrigerantes",
+                "products": [
+                    {
+                        "price": 5,
+                        "name": "Coca Cola Lata",
+                        "quantidade": 0,
+                        "id":generateID(),                        
+                        "img": "assets/images/produtos/cocalata.png"
+                    },
+                    {
+                        "quantidade": 0,
+                        "id":generateID(),                        
+                        "price": 5,
+                        "name": "Guaraná Lata",
+                        "img": "assets/images/produtos/guaranalata.png"
+                    },
+                    {
+                        "img": "assets/images/produtos/fantallata.png",
+                        "id":generateID(),                        
+                        "price": 5,
+                        "name": "Fanta Laranja Lata",
+                        "quantidade": 0
+                    },
+                    {
+                        "price": 5,
+                        "name": "Fanta Uva Lata",
+                        "img": "assets/images/produtos/fantaulata.png",
+                        "quantidade": 0,
+                        "id":generateID(),                   
+                      },
+                    {
+                        "img": "assets/images/produtos/tonicalata.png",
+                        "name": "Tônica Lata",
+                        "price": 5,
+                        "id":generateID(),                        
+                        "quantidade": 0
+                    },
+                    {
+                        "img": "assets/images/produtos/guarana1l.png",
+                        "quantidade": 0,
+                        "price": 6,
+                        "name": "Guaraná 1L",
+                        "id":generateID(),                   
+                      },
+                    {
+                        "img": "assets/images/produtos/coca2l.png",
+                        "price": 12,
+                        "id":generateID(),                        
+                        "name": "Coca 2L",
+                        "quantidade": 0
+                    },
+                    {
+                        "name": "Iti 2L",
+                        "quantidade": 0,
+                        "price": 6,
+                        "id":generateID(),
+                        "img": "assets/images/produtos/refriiti2l.png"
+                    },
+                    {
+                        "id": generateID(),
+                        "quantidade": 0,
+                        "name": "Fanta Laranja 2L",
+                        "img": "assets/images/produtos/refrifanta2l.png",
+                        "price": 10
+                    }
+                ]
+              },{
+                name:'Cervejas', 
+                "id": generateID(), 
+                products:[{
+                id:generateID(),
+
+                name:'Cerveja Heineken Long Neck', 
+                img:'assets/images/produtos/cervejaheilong.png',
+                price:8,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Corona Long Neck', 
+                img:'assets/images/produtos/cervejacoronalong.png', 
+                price:9,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Stella Long Neck', 
+                img:'assets/images/produtos/cervejastellalong.png', 
+                price:8,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Budweiser Long Neck', 
+                img:'assets/images/produtos/cervejabudlong.png',
+                price:7.5,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Skol Beets Long Neck', 
+                img:'assets/images/produtos/skolbeetslong.png',
+                price:12,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Beats GT Long Neck', 
+                img:'assets/images/produtos/gtbeets.png',
+                price:12.5,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Itaipava Malzbier Long Neck', 
+                img:'assets/images/produtos/cervejaitaipavalong.png', 
+                price:8,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Black Princess Long Neck', 
+                img:'assets/images/produtos/cervejablackprincess.png', 
+                price:15,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Heineken Lata', 
+                price:6.5, 
+                img:'assets/images/produtos/cervejaheilata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Itaipava Lata', 
+                price:4, 
+                img:'assets/images/produtos/cervejaitaipavalata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Brahma lata', 
+                price:4.5, 
+                img:'assets/images/produtos/cervejabrahmalata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Skol lata', 
+                price:4.5, 
+                img:'assets/images/produtos/cervejaskollata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Amstel Lata', 
+                price:5,
+                img:'assets/images/produtos/cervejaamstellata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Spaten Lata', 
+                price:6,
+                img:'assets/images/produtos/cervejaspatenlata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Petra Lata', 
+                img:'assets/images/produtos/cervejapetralata.png', 
+                price:5,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Império Lata', 
+                price:4.5,
+                img:'assets/images/produtos/cervejaimperiolata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Brahma Duplo Malte Lata', 
+                img:'assets/images/produtos/cervejabrahmaduplo.png', 
+                price:5, 
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Eisebahn lata', 
+                price:6.3, 
+                img:'assets/images/produtos/cervejaeisebahnlata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Skol Puro Malte lata', 
+                price:5, 
+                img:'assets/images/produtos/cervejaskolpurolata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Cerveja Original lata', 
+                price:6.5, 
+                img:'assets/images/produtos/cervejaoriginallata.png',
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Budweiser Lata', 
+                img:'assets/images/produtos/cervejabudlata.png', 
+                price:5,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Itaipava 0%', 
+                img:'assets/images/produtos/cervejaitaipava0.png', 
+                price:5,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Brahma 0%', 
+                img:'assets/images/produtos/cervejabrahma0.png', 
+                price:6,
+                quantidade:0,
+            }] 
+
+              },{
+                name:"Fardo Cerveja ",
+                "id": generateID(),  
+                products:[{
+                id:generateID(),
+
+                name:'Fardo Cerveja Heineken', 
+                img:'assets/images/produtos/fardoheineken.png',  
+                price:66,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Itaipava', 
+                img:'assets/images/produtos/fardoitaipava.png',  
+                price:42,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Brahma', 
+                img:'assets/images/produtos/fardobrahma.png',  
+                price:48,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Skol', 
+                img:'assets/images/produtos/fardoskol.png',  
+                price:48,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Amstel', 
+                img:'assets/images/produtos/fardoamstel.png',  
+                price:49,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Spaten', 
+                img:'assets/images/produtos/fardospaten.png',  
+                price:60,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Petra', 
+                img:'assets/images/produtos/fardopetra.png',  
+                price:49,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Império', 
+                img:'assets/images/produtos/fardoimperio.png',  
+                price:45.6,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Brahma Duplo Malte', 
+                img:'assets/images/produtos/fardobrahmaduplo.png',  
+                price:48,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Eisenbahn', 
+                img:'assets/images/produtos/fardiei.png',  
+                price:64,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Skol Puro Malte', 
+                img:'assets/images/produtos/fardoskolpuromalte.png',  
+                price:48,
+                quantidade:0,
+            },{
+                id:generateID(),
+
+                name:'Fardo Cerveja Original', 
+                img:'assets/images/produtos/fardooriginal.png',  
+                price:64,
+                quantidade:0,
+            }]
+              },{
+                id: generateID(), 
+                name: "Doses",
+                products: [
+                    {
+                        name: "Dose Contine",
+                        id: generateID(),
+                        img: "assets/images/produtos/dosecontini.png",
+                        price: 13,
+                        quantidade: 0
+                    },
+                    {
+                        "img": "assets/images/produtos/dosedreher.png",
+                        name: "Dose Dreher",
+                        id: generateID(),
+                        quantidade: 0,
+                        price: 4
+                    },
+                    {
+                        name: "Dose Pitu",
+                        img: "assets/images/produtos/dosepitu.png",
+                        id: generateID(),
+                        price: 4,
+                        quantidade: 0
+                    },
+                    {
+                        quantidade: 0,
+                        img: "assets/images/produtos/dose51.png",
+                        id: generateID(),
+                        name: "Dose 51",
+                        price: 3
+                    },
+                    {
+                        img: "assets/images/produtos/dosejurupinga.png",
+                        id:generateID(),
+                        quantidade: 0,
+                        name: "Dose Jurupinga",
+                        price: 7
+                    },
+                    {
+                        quantidade: 0,
+                        name: "Dose São Francisco",
+                        price: 5,
+                        id: generateID(),
+                        img: "assets/images/produtos/dosesaofrancisco.png"
+                    },
+                    {
+                        id:generateID(),
+                        name: "Dose Velho Barreiro",
+                        quantidade: 0,
+                        price: 3,
+                        img: "assets/images/produtos/dosevelhobarreiro.png"
+                    },
+                    {
+                        price: 6,
+                        img: "assets/images/produtos/doseluizence.png",
+                        quantidade: 0,
+                        name: "Dose Luizence",
+                        id: generateID(),
+                    }
+                ]
+              },{
+                  
+                id:generateID(),
+
+                name:'Pinga',
+                products:[{
+                    id:generateID(),
+
+                    name:'51 Pinga 1L', 
+                    img:'assets/images/produtos/51.png',  
+                    price:17,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'51 Ice Long Neck', 
+                    img:'assets/images/produtos/pinga51long.png',  
+                    price:7.5,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Pitu Pinga', 
+                    img:'assets/images/produtos/52.png',  
+                    price:18,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Velho Barreiro', 
+                    img:'assets/images/produtos/53.png',  
+                    price:18,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Corote', 
+                    img:'assets/images/produtos/54.png',  
+                    price:5.5,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Dreher', 
+                    img:'assets/images/produtos/55.png',  
+                    price:18,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Contini', 
+                    img:'assets/images/produtos/pingacontini.png',  
+                    price:35,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Jurupinga', 
+                    img:'assets/images/produtos/pingajurupinga.png',  
+                    price:35,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'São Francisco', 
+                    img:'assets/images/produtos/pingasaofrancisco.png',  
+                    price:28,
+                    quantidade:0,
+                },{
+                    id:generateID(),
+
+                    name:'Luizence', 
+                    img:'assets/images/produtos/pingaluizence.png',  
+                    price:32,
+                    quantidade:0,
+                }]
+              },{
+                name:"Cigarros e Mais ",
+                "id": generateID(),  
+                products:[{
+                  
+                    id:generateID(),
+
+                    name:'Gudang Garan', 
+                    img:'assets/images/produtos/51.png',  
+                    price:1.5,
+                    quantidade:0,
+                   
+                },{
+                id:generateID(),
+
+                key:'',
+                name:'Gelo de Coco', 
+                img:'assets/images/produtos/gelococo.png',  
+                price:4,
+                quantidade:0, 
+            },{
+                id:generateID(),
+
+                key:'',
+                name:'Bala Halls', 
+                img:'assets/images/produtos/halls.png',  
+                price:3,
+                quantidade:0, 
+            }]
+
+              }
+        ],
+        "name": "Bebidas",
+        "id": generateID(),
+        "image2": "assets/images/glass.png",
+        "image": "assets/images/glass.png"
+    },
+    {
+        "key": "comer",
+        "image2": "assets/images/burguer.png",
+        "image": "assets/images/burguer.png",
+        "name": "Conveniência",
+        "itens": [
+        {
+                "id":generateID(),              
+                "name": "Barras de Chocolates",
+                "products": [
+                    {
+                        "quantidade": 0,
+                        "name": "Chocolates ao",
+                        "img": "assets/images/produtos/semfoto.png",
+                        "price": "9",
+                        "id":generateID(),                      
+                        "key": ""
+                    },{
+                        "quantidade": 0,
+                        "name": "Chocolates Branco",
+                        "img": "assets/images/produtos/semfoto.png",
+                        "price": "9",
+                        "id":generateID(),                      
+                        "key": ""
+                    }
+                     
+                ]
+            } ,{
+              name:"Mais",
+              products:[{
+                                id:generateID(),
+
+                name:'Salgadinho  ', 
+                img:'assets/images/produtos/semfoto.png',  
+                price:4, 
+                quantidade:0,
+            },{
+                                id:generateID(),
+
+                name:'Salgadinho ', 
+                img:'assets/images/produtos/semfoto.png',  
+                price:3, 
+                quantidade:0,
+
+            }]
+            }
+        ],
+        "id": generateID()
+    }
+    ]
+    })
+
+
+
+
+  setTimeout(function(){     
+
+   msgLoadContainer.style.cssText='display:none;'
+   alert('Cardápio atualizado com Sucesso!')
+    
+  }, 3000);
+
+  
+
+
+ }) //closeFormFn
+
+
+
+
+
+
+ 
+ form.addEventListener('submit', function(e){
+   e.preventDefault()  
+   let idspedidosRecebidos=[]
+   let pedidoAtual=[]
+   let btnSubmitOrder=e.submitter
+
+   
+      if(inpuMVaue!=0){ 
+        btnSubmitOrder.setAttribute("disabled", true)
+
+            let intMesaValue=String(parseInt(inpuMVaue))
+          
+
+                databaseMesas.map((baseMap)=>{ 
+                      if(baseMap.mesa==intMesaValue){ //VERIFICA EXISTENCIA  
+                          baseMap.orders.map((mapOrders)=>{ 
+                              recebePedidos.push(mapOrders) 
+                              // console.log(mapOrders.idPedido) //id pedidos entregues
+
+                          }) 
+
+                      }  
+                })
+              
+              allordersBuy.map((atualOrderMap)=>{
+                recebePedidos.push(atualOrderMap)
+                console.log(atualOrderMap.idPedido) //id pedido Atual
+                pedidoAtual.push(atualOrderMap.idPedido) 
+
+              })     
+              
+              db.collection('mesasOpen').doc(intMesaValue).set({  
+                mesa:intMesaValue,
+                orders:recebePedidos  //<==================Pedidos Recebidos
+              })
+
+              db.collection('notificacoes').doc(horaReplace).set({  
+                mesa:intMesaValue,
+                orders:allordersBuy,  //<==================Pedidos Recebidos
+                "key":horaReplace,
+                hora:horaAtual
+              }) 
+         
+
+              setTimeout(function(){
+                  // location.reload()
+              
+                 databaseMesas.map((baseMap)=>{ 
+                 if(baseMap.mesa==intMesaValue){ //VERIFICA EXISTENCIA  
+                        baseMap.orders.map((mapOrders)=>{ 
+                            idspedidosRecebidos.push(mapOrders.idPedido) 
+                           
+                            pedidoAtual.map((mapIdAtual)=>{
+                                // console.log('idAtual',mapIdAtual)
+                                idspedidosRecebidos.map((recebidosMap)=>{
+                                  // console.log('idAtual',recebidosMap)
+                                  
+                                      if(recebidosMap===mapIdAtual){
+                                        entregaPed=true
+                                        console.log(recebidosMap)  
+                                        //  alert(recebidosMap)
+                                      }else{
+                                  
+                                      entregaPed=false
+
+                                      }
+                                      
+                                }) 
+
+                            }) 
+                              
+                         
+
+                        }) 
+
+                    } 
+  
+                })
+
+
+                if(entregaPed==true){
+                  alert('O restaurante recebeu seu pedido, aguarde!')
+                  form.reset() 
+                  // location.reload()
+
+                }else{
+                  alert('Enviando novamente')
+                  // form.submit()
+                  btnSubmit.click();
+                }
+              
+
+              }, 3000);
+
+
+
+
+
+
+
+              
+              // db.collection('notificacoes').doc(horaReplace).set({  
+              //   mesa:parseInt(inpuMVaue),
+              //   orders:allordersBuy,  //<==================Pedidos Recebidos
+              //   hora:horaAtual
+              // }) 
+         
+              // alert('Pedido Enviado ao Restaurante')  
+
+     
+              setTimeout(function(){
+                  // location.reload()
+              }, 2000);
+
+      }else if(inpuMWhats!="") {
+        
+        btnSubmitOrder.setAttribute("disabled", true)
+ 
+ 
+        if(databaseDeliveryArr.length>0){
+
+          databaseDeliveryArr.map((mapDataDelivery)=>{ 
+                  let validaName=mapDataDelivery.name===inputUserName.toLowerCase() 
+                      
+                      if(validaName==true){ 
+                          mapDataDelivery.orders.map((mapOrdersDelv)=>{ 
+                            recebePedidos.push(mapOrdersDelv) 
+                          }) 
+                      } 
+ 
+                  })
+
+                      allordersBuy.map((atualOrderMap)=>{
+                            recebePedidos.push(atualOrderMap)
+                      })
+
+                      let userNameString=inputUserName.toLowerCase().replace(/\s/g, '+');
+                          db.collection('delivery').doc(userNameString).set({  
+                            "name":userNameString,
+                            "whatsapp":inpuMWhats,
+                            orders:recebePedidos  //<==================Pedidos Recebidos
+                      }) 
+
+                      const horaAtual=relogio()
+                         
+                      db.collection('notificacoes').doc(horaReplace).set({  
+                            "name":userNameString,
+                            "whatsapp":inpuMWhats,
+                            "key":horaReplace,
+
+                            orders:allordersBuy,  //<==================Pedidos Recebidos
+                            hora:horaAtual
+
+                      }) 
+                      // allordersBuy=[]
+                        
+                    
+                      setTimeout(function(){ 
+                        databaseDeliveryArr.map((delverymap)=>{ 
+                          delverymap.orders.map((mapOrdersDelivery)=>{ 
+                            
+
+                            allordersBuy.map((atuaIdOrder)=>{
+                              // console.log("ID banco",mapOrdersDelivery.idPedido)
+
+                              console.log("atualID",atuaIdOrder)
+
+                              if(atuaIdOrder.idPedido===mapOrdersDelivery.idPedido){
+                                alert('Seu pedido foi entregue ao restaurante')
+                              }
+
+                            }) 
+                          })
+                        })
+                      }, 2000);
+                   
+                    
+
+                      
+                     
+
+
+
+        }else{ 
+
+              let userNameString=inputUserName.toLowerCase().replace(/\s/g, '+');
+             
+              db.collection('delivery').doc(userNameString).set({  
+                "name":userNameString,
+                "whatsapp":inpuMWhats,
+                orders:allordersBuy  //<==================Pedidos Recebidos
+              }) 
+
+              const horaAtual=relogio()
+              
+              db.collection('notificacoes').doc(horaReplace).set({  
+                "name":userNameString,
+                "whatsapp":inpuMWhats,
+                "key":horaReplace,
+                orders:allordersBuy,  //<==================Pedidos Recebidos
+                hora:horaAtual
+              })  
+            
+             
+              setTimeout(function(){ 
+                databaseDeliveryArr.map((delverymap)=>{ 
+                  delverymap.orders.map((mapOrdersDelivery)=>{ 
+                    
+
+                    allordersBuy.map((atuaIdOrder)=>{
+                      console.log("ID banco",mapOrdersDelivery.idPedido)
+
+                      console.log("atualID",atuaIdOrder)
+
+                      if(atuaIdOrder.idPedido===mapOrdersDelivery.idPedido){
+                        alert('Seu pedido foi entregue ao restaurante')
+                      }
+
+                    }) 
+                  })
+                })
+              }, 2000);
+
+
+        }
+     
+      }else{
+        alert('Prencha todos os campos!')
+      } 
+ 
+ })
+ 
+ 
+ const currencyMenu=db.collection('cardapio') 
+ 
+ currencyMenu.onSnapshot((snapshot) => {  
+  let data=[]
+        snapshot.forEach((doc) => { 
+          data.push(doc.data()) 
+            
+        }); 
+        
+        getApi(categoriesContainer,data,true)
+
+    }, (error) => {
+            console.log('Erro Notificações')
+
+    });
+
+ 
+ //READ MESAS
+    const ordersLab=db.collection('mesasOpen') 
+    ordersLab.onSnapshot((snapshot) => {  
+      // let databaseMesas=[]
+        snapshot.forEach((doc) => { 
+          databaseMesas.push(doc.data())
+ 
+        }); 
+    }, (error) => {
+            console.log('Erro Notificações')
+
+    });
+
+ //READ DELIVERYS 
+    const ordersLabDelivery=db.collection('delivery') 
+    ordersLabDelivery.onSnapshot((snapshot) => {  
+        snapshot.forEach((doc) => { 
+          databaseDeliveryArr.push(doc.data())
+        }); 
+    }, (error) => {
+
+        console.log('Erro Notificações')
+        // ...
+    });
+
+ </script>
+ 
+    
+</body>
+</html>

@@ -1,0 +1,74 @@
+.modal-container {
+    background: rgba(34, 29, 29, 0.137);
+    position: fixed;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: none;
+}
+.modal-container.show{
+    display: flex;
+
+}
+.modal {
+    background: white;
+    width: 90%;
+    margin: 20px auto;
+    border-radius: 20px;
+    padding: 15px;
+    overflow: auto;
+}
+
+.modal form {
+    width: 80%;
+    margin: 40px auto;
+}
+.editProd svg {
+    font-size: 1.4rem;
+    margin: 15px;
+    opacity: .7;
+}
+.editProd button { 
+    margin: 0 10px;
+}
+button#btnSalvar {
+    background: #FED30A;
+    color: black;
+    margin: 40px auto;
+    font-size: 1.0rem;
+    border-radius: 20px;
+    height: 55px;
+    padding: 0 25px;
+    margin: 20px auto 0;
+    text-transform: capitalize;
+    font-weight: bold;
+    font-family: 'Lexend Deca', sans-serif;
+    display: flex;
+    align-items: center;
+    width: 240px;
+    justify-content: center;
+}
+.modal .mylabel  label{
+    border: 1px solid;
+    border-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal .mylabel  input{
+    border: 1px solid;
+    border-left: 0;
+ }
+.modal input {
+    border: 1px solid #73859E;
+}
+
+.modal .controls {
+    position: relative;
+ 
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}

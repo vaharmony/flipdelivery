@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, user-scalable=no" />
+    <meta name="theme-color" content="black">
+    <title>Xara Delivery de Bebidas</title>
+    <link rel="shortcut icon" href="favico.png" type="image/png">
+    <link rel="stylesheet" href="assets/css/app.css">  
+    <link rel="stylesheet" href="assets/css/validation.css">  
+    <link rel="stylesheet" href="assets/css/inputs.css">  
+    <link rel="stylesheet" href="assets/css/cart.css">  
+    <link rel="stylesheet" href="assets/components/user/user.css">  
+    <link rel="stylesheet" href="assets/components/menu/menu.css">  
+    <link rel="stylesheet" href="assets/components/search/search.css">  
+    <link rel="stylesheet" href="assets/components/categorias/categorias.css">  
+    <link rel="stylesheet" href="assets/components/product/product.css">  
+    <link rel="stylesheet" href="assets/components/mediasocial/mediasocial.css">  
+    <link rel="stylesheet" href="assets/components/swiper/swiper.css">  
+    <link rel="stylesheet" href="assets/components/banners/banners.css">  
+    <link rel="stylesheet" href="assets/components/checkout/checkout.css">   
+    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100;200;300;400;700;900&display=swap" rel="stylesheet">
+</head>
+ 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-SXLJF6J71K"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-SXLJF6J71K');
+</script>
+
+
+
+  <body>
+    <div id="list"></div>
+<div class="validation show" id="validation" >
+  <div class="loginCont">
+    <div class='header'>
+      <div class="brand" >  
+        <img src="assets/images/logo.png" alt="">
+      </div>
+      <button id="btnFullScreen" onclick="fullScreen(event)"><i style="color: red;" class="fa-solid fa-expand"></i>
+      <span>tela cheia</span>
+      </button>
+      <button id="btnCloseFullScreen" onclick="closeFullscreen(event)"> <i class="fa-regular fa-circle-xmark"></i></button> 
+    </div>
+    <div class="content brand" >  
+      <img src="assets/images/logo.png" alt="">
+    </div>
+    <div class="footer" >
+      <button id='gaut'>
+        <div>
+          <img src="assets/images/icongoogle.png" alt="">
+        </div>
+        <span>Continue com Google</span>
+      </button>
+    </div>
+  </div>
+</div>
+<script>
+  loginContainer=document.getElementById('validation')
+  
+  if(loginContainer){ 
+    if(window.matchMedia("(max-width: 700px)").matches){ loginContainer.style.cssText='background-image: url(assets/images/bg-validation.png);'
+    }else{  loginContainer.style.cssText='background-image: url(assets/images/bg-desktop.png);'   }
+  }
+</script>
+<div class="user" id="user"> 
+</div>
+<div class="cart" id="cart">  </div>
+<!-- CHECKOUT -->
+<div class="checkout" id="checkout">
+  <div class="controls">  
+    <button onclick="closeCheckout()"> <i class="fa-solid fa-chevron-left"></i></button>
+    <button onclick="closeCheckout()"><i class="fa-solid fa-xmark"></i></button>
+  </div>
+  <div class="content">
+    <h2>Finalizar Pedido </h2>
+    <p><i class="fa-solid fa-location-crosshairs"></i> End. Praia da Lagoinha - Nº 000  | Ubatuba-SP</p>
+  </div>
+  <form id="checkoutform" class="checkoutform" >
+    <div>
+      <label style="
+        width: 100%;
+        height: auto;
+        ">
+      Forma de retirada:
+      </label> 
+      <div class="mylabel select">
+        <label>
+        <img src="assets/images/inputs/archive.png" >
+        </label>
+        <select onchange="formaRetirada()" id="selectCheckout">
+          <option value="1">Selecione a forma de retirada</option>
+          <option value="mesa">Mesa</option>
+          <option value="balcao">Retirar no balcão</option>
+          <option value="delivery">Delivery</option>
+        </select>
+      </div>
+      <div id="setMesa" class="mylabel"  style="display:none">
+        <label style="height:48px;"> 
+        <img src="assets/images/inputs/mesa.png"  >  
+        </label>
+        <input id="inputMesa"  type="number" placeholder="Digite o numero da mesa">
+      </div>
+      <div id="whatsappId"  style="display: none; ">
+        <span class="alertcheck" id='dezdelivery'><i class="fa-solid fa-info"></i>Taxa de entrega 10% do pedido. </span>
+        <div id="setPhone" class="mylabel" >
+          <label style="height:48px;">   
+          <i class="fa-solid fa-location-dot"></i>
+          </label>
+          <input id="inputLocation"  type="text" placeholder="Digite o local da entrega .."  >
+        </div>
+        <div id="setEnd" class="mylabel" >
+          <label style="height:48px;">  
+          <img src="assets/images/inputs/whats.png" >  
+          </label>
+          <input id="inputMesa"  type="number" placeholder="Numero celular whatsapp">
+        </div>
+        <span class="alertcheck"><i class="fa-solid fa-info"></i> Receba notificações via whatsapp </span>
+      </div>
+    </div>
+    <div style="position: relative;">
+      <label> 
+      Observações do Pedido:
+      </label>
+      <textarea id="areaObs" placeholder="Digite observações do seu pedido"></textarea>
+    </div>
+    <div id="mgg"></div>
+    <div class="total" id="totalfinesh"> 
+      <button type="submit" id="submitCheck">ENVIAR MEU PEDIDO <i class="fa-solid fa-paper-plane"></i> </button>
+    </div>
+</div>
+</form>
+<!-- Mensagem Enviando -->
+<div id="msgLoad" class="msgLoad">
+  <img src="assets/images/logo.png">
+  <h3>Aguarde </h3>
+  <p>Estamos enviando seu pedido</p>
+  <img src="assets/images/loading.gif">
+  <!-- <button>Cancelar</button>  -->
+</div>
+</div>
+<div class="menu">
+  <ul>
+    <!-- <button><img src="assets/images/UserWhite.png" alt="" srcset=""></button>  -->
+    <button id="cartPreview">
+    <i class="fa-solid fa-cart-shopping"></i>
+    </button>
+    <!-- <button><img src="assets/images/menu.png" alt="" srcset=""></button> -->
+  </ul>
+</div>
+<div class="search">
+  <h2>O que deseja beber hoje?</h2>
+  <form>
+    <div class="mylabel">
+      <label style="
+        top: 0px;
+        height: 46px;
+        ">  
+      <i class="fa-solid fa-magnifying-glass"></i>  
+      </label>
+      <input  onclick="getSearch(event)" type="text" placeholder="Buscar produtos...">
+    </div>
+    <div id="contentSearch" class="contentSearch">
+      <!-- CONTROLES -->
+      <div class="controls">
+        <button onclick="getSearch(event)">
+        <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <button onclick="getSearch(event)">
+        <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+      <div class="mylabel" style="position: inherit;width: 100%;margin-top: 80px;margin-bottom: 10px;margin-left: 10px;"> 
+        <label>  
+        <i class="fa-solid fa-magnifying-glass"></i>
+        </label>
+        <input id="serchInput" type="text" placeholder="Digite sua busca"> 
+      </div>
+    </div>
+  </form>
+  <div id="searchResult">
+    <span class="ux">Encontre produtos aqui...O que está buscando?</span>
+  </div>
+</div>
+<div id="categories" class="categories"> </div>
+  </body>
+    
+  
+ </html>
+
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js" integrity="sha512-WFN04846sdKMIP5LKNphMaWzU7YpMyCU245etK3g/2ARYbPK9Ub18eG+ljU96qKRCWh+quCY7yefSmlkQw1ANQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> 
+ <script src="assets/components/api/apidb.js"></script>
+ <script src="assets/js/all.js"></script>
+ <script src="assets/components/relogio/relogio.js"></script>
+ <script src="assets/components/checkout/animatedCheckOut.js"></script>
+ <script src="assets/components/checkout/checkout.js"></script>
+ <script src="assets/components/categorias/categorias.js"></script>
+ <script src="assets/components/api/api-categorias.js"></script>
+ <script src="assets/components/orders/ordermore.js"></script>
+ <script src="assets/components/search/search.js"></script>
+ <script src="assets/js/validation.js"></script>
+ <script src="assets/js/cart.js"></script>
+ <script src="assets/components/swiper/swiper.js"></script>
+ <script src="assets/js/app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+ <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+ <script type="module">
+    
+    const firebaseConfig = {
+      apiKey: "AIzaSyDuvA_WF4pn-jl0VNyTqBCAXeblEBrO2Tw",
+      authDomain: "xara-c4426.firebaseapp.com",
+      projectId: "xara-c4426",
+      storageBucket: "xara-c4426.appspot.com",
+      messagingSenderId: "479792460856",
+      appId: "1:479792460856:web:b9d4b1edbba6262ec6a2cd"
+    }; 
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
+    import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
+
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth();
+    const provider = new GoogleAuthProvider()
+
+
+      const gaut= document.getElementById("gaut");
+  // const signOutButton = document.getElementById("signOutButton");
+
+  
+  const userSignIn = async() => {
+    signInWithPopup(auth, provider)
+    .then((result) => {
+        const user = result.user
+        console.log('result',result);
+        validation(event)
+    }).catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message
+    })
+  }
+
+  onAuthStateChanged(auth, (user) => {
+    if(user) {
+      
+      console.log(user)
+
+      var guser=user.displayName 
+      var gphoto=user.photoURL
+
+      if(user){
+        validation(event,guser,gphoto)
+      }
+      
+    } else {
+   
+    }
+  })
+
+
+  gaut.addEventListener('click', userSignIn);
+
+
+      firebase.initializeApp(firebaseConfig);   
+      // Initialize Cloud Firestore and get a reference to the service
+      const db = firebase.firestore();
+
+
+      let btnSubmit=document.getElementById('submitCheck')
+      let list = document.getElementById("notifications") 
+      let form = document.querySelector(".checkoutform")
+      let horaAtual=relogio()
+      let horaReplace=horaAtual.replace(/[^0-9]/g, '')
+      let databaseDeliveryArr=[]
+      var cardapiobd=[]
+
+      let databaseMesas=[] 
+      let entregaPed=false
+
+
+ //SUBMIT CHECKOUT AND UPDATE 
+ form.addEventListener('submit', function(e){
+
+    e.preventDefault()  
+    let idspedidosRecebidos=[]
+    let pedidoAtual=[]
+    let btnSubmitOrder=e.submitter
+
+    
+
+    allordersBuy=[{ 
+        idPedido:Math.floor(Math.random() * 1000).toString(),
+        data:dataHora(),
+        hora:relogio(),
+        itens:prodsSelct,
+        location:locationvalue, 
+        observacao:obs 
+    }]
+
+
+   
+      if(inpuMVaue!=0){ 
+
+            //Load 
+            document.getElementById('msgLoad').style.cssText='display:flex' 
+            btnSubmitOrder.setAttribute("disabled", true)
+
+            let intMesaValue=String(parseInt(inpuMVaue)) 
+                databaseMesas.map((baseMap)=>{ 
+                      if(baseMap.mesa==intMesaValue){ //VERIFICA EXISTENCIA  
+                          baseMap.orders.map((mapOrders)=>{ 
+                              recebePedidos.push(mapOrders)  
+
+                          }) 
+
+                      }  
+                })
+              
+              allordersBuy.map((atualOrderMap)=>{
+                recebePedidos.push(atualOrderMap) 
+                pedidoAtual.push(atualOrderMap.idPedido) 
+
+              })     
+              
+
+              //<==================Pedidos Mesas
+              db.collection('mesasOpen').doc(intMesaValue).set({  
+                mesa:intMesaValue,
+                orders:recebePedidos,  //<==================Pedidos Recebidos
+                
+              })
+
+              
+              db.collection('notificacoes').doc(horaReplace).set({  
+                mesa:intMesaValue,
+                orders:allordersBuy,  //<==================Pedidos Recebidos
+                "key":horaReplace,
+                hora:horaAtual
+              }) 
+
+
+              // MENSAGEM WHATSAPP PEDIDO MESA
+         
+              setTimeout(function(){
+                    alert('Seu pedido foi entregue ao restaurante')
+
+                         
+                   var url = "https://wa.me/5512981021517?text=" // Seu numero
+                            + "*Olá, novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
+                            + "%0a" // Quebra de linha
+                            + "*Tipo*: Mesa" + "%0a" // Dados do formulário
+                            + "*nº mesa*: " +intMesaValue + "%0a" // Dados do formulário
+                            + "*Nome*: " + inputUserName + "%0a"
+                            + "%0a" // Quebra de linha
+                            + "*Pedido itens:*" + "%0a" // Mensagem personalizada
+                             //<==================Pedidos Recebidos
+                            allordersBuy.map((currentOrderMap)=>{
+                                  currentOrderMap.itens.map((currentItensMap)=>{
+                                    url+=""+currentItensMap.quantidade+"un." +currentItensMap.name + "%0a" // Mensagem personalizada
+                                    console.log(totalCart)
+                                  })
+                            })
+                            url+="*Observações do pedido*: " + observacaoPedido + "%0a" 
+                              + "%0a" 
+                              + " *Total da Compra*: " + "%0a"
+                              + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
+                           
+                            window.location.href=url;
+
+
+                    setTimeout(function(){
+                      location.reload() 
+                    }, 3000);
+
+              }, 2000);
+
+
+              setTimeout(function(){
+              
+                 databaseMesas.map((baseMap)=>{ 
+                 if(baseMap.mesa==intMesaValue){ //VERIFICA EXISTENCIA  
+                        baseMap.orders.map((mapOrders)=>{ 
+                            idspedidosRecebidos.push(mapOrders.idPedido) 
+                           
+                            pedidoAtual.map((mapIdAtual)=>{ 
+                                idspedidosRecebidos.map((recebidosMap)=>{ 
+                                  
+                                      if(recebidosMap===mapIdAtual){
+                                        entregaPed=true 
+                                      }else{
+                                  
+                                      entregaPed=false
+
+                                      }
+                                      
+                                }) 
+
+                            }) 
+                              
+                         
+
+                        }) 
+
+                    } 
+  
+                })
+
+
+                if(entregaPed==true){
+                  alert('O restaurante recebeu seu pedido, aguarde!')
+                  setTimeout(function(){  
+                     
+                   var url = "https://wa.me/5512981021517?text=" // Seu numero
+                            + "*Olá, novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
+                            + "%0a" // Quebra de linha
+                            + "*Tipo*: Mesa" + "%0a" // Dados do formulário
+                            + "*nº mesa*: " +intMesaValue + "%0a" // Dados do formulário
+                            + "*Nome*: " + inputUserName + "%0a"
+                            + "%0a" // Quebra de linha
+                            + "*Pedido itens:*" + "%0a" // Mensagem personalizada
+                             //<==================Pedidos Recebidos
+                            allordersBuy.map((currentOrderMap)=>{
+                                  currentOrderMap.itens.map((currentItensMap)=>{
+                                    url+=""+currentItensMap.quantidade+"un." +currentItensMap.name + "%0a" // Mensagem personalizada
+                                    console.log(totalCart)
+                                  })
+                            })
+                            url+="*Observações do pedido*: " + observacaoPedido + "%0a" 
+                              + "%0a" 
+                              + " *Total da Compra*: " + "%0a"
+                              + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
+                           
+                            window.location.href=url;
+
+                  }, 2000);
+                  form.reset() 
+
+
+                     
+
+                }else{
+                  alert('Enviando novamente')
+                  // form.submit()
+                  btnSubmit.click();
+                }
+              
+
+              }, 3000);
+
+ 
+     
+            
+
+      }else if(inpuMWhats!="") {
+        
+    
+        //Load 
+        document.getElementById('msgLoad').style.cssText='display:flex'
+        btnSubmitOrder.setAttribute("disabled", true)
+
+ 
+ 
+        if(databaseDeliveryArr.length>0){
+          let initF=true  // FALSE PARA MAQUINA DELIVERY
+          let idClient=localStorage.getItem("idClient");
+
+           
+            function orderSend(){ 
+
+              setTimeout(function(){ 
+                alert('Seu pedido foi entregue ao restaurante') 
+                setTimeout(function(){
+                  location.reload() 
+                }, 3000);
+              }, 2000);
+              }
+          databaseDeliveryArr.map((mapDataDelivery)=>{ 
+
+                 
+                  
+                      if(mapDataDelivery.id==idClient){ 
+                          mapDataDelivery.orders.map((ordersMap)=>{ 
+                            recebePedidos.push(ordersMap) 
+                            console.log("Pedidos banco",ordersMap)
+
+                          }) 
+                      } 
+ 
+                  })
+
+                  // PEDIDO DA ULTIMA SESSÃO
+                  allordersBuy.map((atualOrderMap)=>{
+                        recebePedidos.push(atualOrderMap)
+                  })
+                  // VAR TODOS OS PEDIDOS DO CLIENT ID >>>>>>>>>>> recebePedidos
+
+                  let userNameString=inputUserName.toLowerCase().replace(/\s/g, '');
+
+                      
+                      if(initF==true){ 
+                          // ENVIA PEDIDO DELIVERY
+
+
+                          console.lo('ponto1',
+                            {  
+                                "name":userNameString,
+                                "id":idClient,
+                                "whatsapp":inpuMWhats,
+                                orders:recebePedidos   
+                          }
+                          )
+                          db.collection('delivery').doc(idClient).set({  
+                                "name":userNameString,
+                                "id":idClient,
+                                "whatsapp":inpuMWhats,
+                                orders:recebePedidos   
+                          }) 
+
+                          // // ENVIA NOTIFICACAO DELIVERY
+                          db.collection('notificacoes').doc(horaReplace).set({  
+                                "name":userNameString,
+                                "whatsapp":inpuMWhats,
+                                "key":horaReplace, 
+                                orders:allordersBuy,   
+                                hora:horaAtual 
+                          }) 
+                        }
+                        
+                      // ENVIA PEDIDO WHATSAPP
+                      setTimeout(function(){ 
+                        databaseDeliveryArr.map((delverymap)=>{ 
+                          delverymap.orders.map((mapOrdersDelivery)=>{ 
+                            
+
+                            allordersBuy.map((atuaIdOrder)=>{  
+
+                              if(atuaIdOrder.idPedido===mapOrdersDelivery.idPedido){
+ 
+                                var sendOrder=true
+                              
+
+                                setTimeout(function(){ 
+                               
+                                      var url = "https://wa.me/5512981021517?text=" // Seu numero
+                                        + "*Olá, novo pedido pelo APP <3*" + "%0a" // Mensagem personalizada
+                                        + "%0a" // Quebra de linha
+                                        + "*Tipo*: Delivery" + "%0a" // Dados do formulário
+                                        + "*Whatsapp*: " +inpuMWhats + "%0a" // Dados do formulário
+                                        + "*Endereço*: " +locationvalue + "%0a" // Dados do formulário
+                                        + "*Nome*: " + inputUserName + "%0a"
+
+                                        + "%0a" // Quebra de linha
+                                        + "*Pedido itens:*" + "%0a" // Mensagem personalizada
+                                        //<==================Pedidos Recebidos
+                                        allordersBuy.map((currentOrderMap)=>{
+                                              currentOrderMap.itens.map((currentItensMap)=>{
+                                                url+=""+currentItensMap.quantidade+"un." +currentItensMap.name + "%0a" // Mensagem personalizada
+                                                
+                                              })
+                                        })
+                                        
+                                        url+="*Observações do pedido*: " + observacaoPedido + "%0a" 
+                                        + "%0a"  
+                                        + " *Total da Compra*: " + "%0a"
+                                        + totalCart.toLocaleString('pt-br',{style: 'currency', currency: 'BRL'}) + "%0a" // Mensagem personalizada
+                                      
+
+                                        if(initF==true){
+                                          window.location.href=url; 
+                                        }
+
+                                }, 1500);
+
+
+
+
+                              }
+
+                            }) 
+                          })
+                        })
+                      }, 2000);
+
+                      if(sendOrder){
+                        orderSend()
+                      }
+
+        }else{ 
+
+
+
+
+            //PRIMEIRO PEDIDO DELIVER?
+
+              let userNameString=inputUserName.toLowerCase().replace(/\s/g, '');
+              let idClient=localStorage.getItem("idClient");
+
+              console.log('first buy ?',{  
+                "name":userNameString,
+                "id":idClient, 
+                "whatsapp":inpuMWhats, 
+                orders:allordersBuy  //<==================Pedidos Recebidos
+                
+              })
+              db.collection('delivery').doc(idClient).set({  
+                "name":userNameString,
+                "id":idClient, 
+                "whatsapp":inpuMWhats, 
+                orders:allordersBuy  //<==================Pedidos Recebidos
+                
+              })  
+ 
+              const horaAtual=relogio()
+              
+              db.collection('notificacoes').doc(horaReplace).set({  
+                "name":userNameString,
+                "whatsapp":inpuMWhats,
+                "key":horaReplace,
+                orders:allordersBuy,  //<==================Pedidos Recebidos
+                hora:horaAtual
+              })  
+            
+             
+              setTimeout(function(){ 
+                databaseDeliveryArr.map((delverymap)=>{ 
+                  delverymap.orders.map((mapOrdersDelivery)=>{  
+                    allordersBuy.map((atuaIdOrder)=>{ 
+                      if(atuaIdOrder.idPedido===mapOrdersDelivery.idPedido){
+                        setTimeout(function(){
+                                  alert('Seu pedido foi entregue ao restaurante') 
+                                  setTimeout(function(){
+                                    location.reload() 
+                                  }, 3000);
+                        }, 2000);
+                      }
+
+                    }) 
+                  })
+                })
+              }, 3000);
+
+
+        }
+     
+      }else{
+        alert('Prencha todos os campos!')
+      } 
+ 
+ })
+
+
+
+
+//  REQUEST DE DADOS
+
+ const currencyMenu=db.collection('cardapio') 
+ currencyMenu.onSnapshot((snapshot) => {  
+       var data=[]
+        snapshot.forEach((doc) => { 
+          data.push(doc.data())  
+        });  
+        getApi(categoriesContainer,data)  
+    }, (error) => {
+            console.log('Erro Notificações')
+
+    });  
+
+
+ //REQUEST MESAS
+    const ordersLab=db.collection('mesasOpen') 
+    ordersLab.onSnapshot((snapshot) => {  
+      // let databaseMesas=[]
+        snapshot.forEach((doc) => { 
+          databaseMesas.push(doc.data())
+ 
+        }); 
+    }, (error) => {
+            console.log('Erro Notificações')
+
+    });
+
+ //REQUEST DELIVERYS 
+    const ordersLabDelivery=db.collection('delivery') 
+    ordersLabDelivery.onSnapshot((snapshot) => {  
+        snapshot.forEach((doc) => { 
+          databaseDeliveryArr.push(doc.data())
+        }); 
+    }, (error) => {
+
+        console.log('Erro Notificações')
+        // ...
+    });
+
+ </script>
+ 
+    
+</body>
+</html>

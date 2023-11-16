@@ -1,0 +1,9 @@
+header{
+    display:flex;
+    justify-content: space-between;
+}
+div#user > div:first-child {
+    color: black;
+    font-weight: 500;
+    margin-right: 8px;
+}

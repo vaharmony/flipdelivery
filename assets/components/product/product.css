@@ -1,0 +1,65 @@
+.produto {
+    display: flex;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 0 5px;
+    font-family: 'Lexend Deca', sans-serif;
+    align-items: center;
+    height: auto;
+    margin: 5px;
+    justify-content: space-between;
+}
+.produto img {
+    width: 100px;
+    border-radius: 5px;
+    max-height: initial;
+    height: 100px;
+    margin: 5px 0;
+    position: initial;
+     
+}
+
+.prod-val{
+    padding: 10px;
+    width: 48%;
+}
+.quantidade {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.quantidade input {
+    pointer-events: none;
+}
+.produto .prod-val .title-prod {
+    color: #03184e;
+    margin: 0px;
+    font-weight: 700;
+    font-size: 1.5rem;
+    line-height: 1.1;}
+.produto .prod-val .valor {
+    color: #545454;
+    font-weight: 400;
+    font-size: 14px;
+}
+.produto .quantidade button {
+    width: 60px;
+    height: 41px;
+    border: 0px;
+    border-radius: 12px;
+    color: white;
+    background-color: black;
+    margin: 10px 4px;
+    font-size: 15px;
+}
+.produto .quantidade input {
+    width: 23px;
+    height: 25px;
+    border: 0px;
+    border-radius: 9px;
+    padding-left: 3px;
+    font-size: 1.1rem;
+    text-align: center;
+ 
+}

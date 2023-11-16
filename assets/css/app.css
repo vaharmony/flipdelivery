@@ -1,0 +1,169 @@
+body {
+    font-family: 'Lexend Deca', sans-serif;
+    background-color: white;
+    margin: 0px;
+    /* overflow: hidden; */
+    max-width: 800px; 
+    margin: 0 auto;
+}
+.brand {
+    display: none;
+}
+
+@media (min-width:1024px){
+    div#validation {
+        background-position: 290px -50px;
+    }
+    .loginCont { 
+        width: 540px;
+        position: relative;
+        height: 100vh;
+        background-color: #0c0c0c;
+    }
+    .brand img {
+        width: 70px;
+    }
+    .content.brand{
+        display: none;
+    }
+    .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 90%;
+        margin: 20px auto;
+    }
+
+    .brand {
+        display: inherit;
+    }
+    
+
+}
+.socialmedia {
+    margin: 20px auto;
+}
+
+button#closedSection {
+    background: transparent;
+    width: 110px;
+    margin: 0 20px;
+}
+span.outLine {
+    font-weight: 600;
+    font-size: 0.88rem;
+    border: 2px solid;
+    width: 147px;
+    border-radius: 20px;
+    padding: 5px 1px;
+    margin: 0 auto 15px !important;
+}
+button#btnFullScreen {
+    background: transparent;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+button {
+    background:transparent;
+    border:0;
+}
+.controls button svg {
+    color: black;
+    margin: 20px;
+}
+div#cart .controls {
+    background: white;
+}
+
+.controls button {
+    /* background: red; */
+   
+    margin: 10px;
+    color: black;
+    height: 50px;
+    width: 40%;
+    display: flex;
+    align-items: center;
+}
+
+.controls button:first-child {
+    justify-content: flex-start;
+   
+}
+.controls button:last-child {
+    justify-content: flex-end;
+ 
+}
+.categories {
+    margin: 20px auto;
+}
+.produto {
+    margin: 10px auto;
+}
+h1 {
+    margin: 10px auto;
+    font-size: 1.0rem;
+    font-weight: 300;
+    display: block;
+    text-align: center;
+    
+}
+h2 {
+    padding: 0px 20px;
+    font-size: 2.2rem;
+    width: 300px;
+    color: black;
+    margin: 10px 0px 15px;
+    line-height: 1.0;
+    font-weight: 300;
+}
+.controls {
+    position: absolute;
+    top: 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%; 
+    background: #ffffff;
+}
+@media(min-width:600px){
+    .banners{
+        display: none;
+    }
+}
+.msgLoad img:first-child {
+    width: 160px;
+    margin: 50px auto 0;
+}
+.msgLoad {
+    position: fixed;
+    background: #ff253a;
+    color: white;
+    display: none;
+    z-index: 999;
+    height: 100%;
+    width: 100%;
+    left: 0;
+    top: 0;
+    flex-direction: column;
+    align-items: center;
+}
+div#msgLoad h3 {
+    margin: 10rem auto 5px;
+    font-size: 1.8rem;
+}
+.msgLoad img:first-child {
+    display: none;
+}
+div#msgLoad p {
+    color: #ffb6b6;
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 0;
+}
+.msgLoad img {
+    max-width: 140px;
+    margin: 5rem auto 0;
+}
