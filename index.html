@@ -215,19 +215,20 @@
  <script type="module">
     
     const firebaseConfig = {
-      apiKey: "AIzaSyAyxC6S9lIs2q6MXPJzB4rpjod3HbRXJgU",
-      authDomain: "harmonyfoodapp.firebaseapp.com",
-      databaseURL: "https://harmonyfoodapp-default-rtdb.firebaseio.com",
-      projectId: "harmonyfoodapp",
-      storageBucket: "harmonyfoodapp.appspot.com",
-      messagingSenderId: "910886750410",
-      appId: "1:910886750410:web:810fa41051ae6d12684c33",
-      measurementId: "G-9HD4J8Z2XP"
+      apiKey: "AIzaSyAwjbm6-gVDHbSHrDUMSdylb9ccCs7o0x4",
+      authDomain: "flipdelivery-fc064.firebaseapp.com",
+      projectId: "flipdelivery-fc064",
+      storageBucket: "flipdelivery-fc064.appspot.com",
+      messagingSenderId: "502283676748",
+      appId: "1:502283676748:web:eb5c61bdd8fe424d3b18e9"
     }; 
     import { initializeApp } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-app.js";
     import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.0.0/firebase-auth.js";
 
     const app = initializeApp(firebaseConfig);
+
+
+    
     const auth = getAuth();
     const provider = new GoogleAuthProvider()
 
