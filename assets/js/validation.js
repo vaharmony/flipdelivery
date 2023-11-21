@@ -1,10 +1,5 @@
  let validateView=document.getElementById('validation')
-
-openApp=()=>{
-  validateView.style.cssText=`display:none`
-  console.log('t4',validateView)
-
-}
+ 
  
 
   function validation(event,guser,gphoto){ 
@@ -32,9 +27,19 @@ openApp=()=>{
           <img src=' `+gnphoto+` ' alt=''>
         </div>
       `
+      function resolverDepoisDe2Segundos(gnphoto) {
+        return new Promise((gnphoto) => {
+          setTimeout(() => {
+           
+            validateView.style.cssText=`display:none`
 
-      setTimeout(openApp(), 2000);
+          }, 2000);
+        });
+      }
 
+      resolverDepoisDe2Segundos(gnphoto) 
+      
+ 
       }
  
 
