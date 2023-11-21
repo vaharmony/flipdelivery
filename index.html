@@ -230,8 +230,10 @@
     signInWithPopup(auth, provider)
     .then((result) => {
         const user = result.user
-        console.log('result2',result);
-        validation(event)
+        console.log('logaado',result);
+        if(user){
+          validation(event,guser,gphoto)
+        }
     }).catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message
@@ -245,19 +247,14 @@
   }
 
   onAuthStateChanged(auth, (user) => {
-    if(user) {
-      
-      console.log(user)
+    console.log('tentou locar');
 
+    if(user) { 
       var guser=user.displayName 
-      var gphoto=user.photoURL
-
-      if(user){
-        validation(event,guser,gphoto)
-      }
+      var gphoto=user.photoURL 
       
     } else {
-   
+      
     }
   })
 
