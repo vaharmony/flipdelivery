@@ -232,7 +232,7 @@
     const provider = new GoogleAuthProvider()
 
 
-      const gaut= document.getElementById("gaut");
+  const gaut= document.getElementById("gaut");
   // const signOutButton = document.getElementById("signOutButton");
 
   
@@ -246,6 +246,12 @@
         const errorCode = error.code;
         const errorMessage = error.message
     })
+  }
+
+  const userSignOut = async() => {
+    signOut(auth).then(() => {
+        alert("Você saiu com sucesso!");
+    }).catch((error) => {})
   }
 
   onAuthStateChanged(auth, (user) => {

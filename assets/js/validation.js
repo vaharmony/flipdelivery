@@ -1,18 +1,18 @@
 
- const validateView=document.getElementById('validation')
 
  
 
   function validation(event,guser,gphoto){ 
     
       event.preventDefault() 
+      const validateView=document.getElementById('validation')
       
       var gname=guser
       var gnphoto=gphoto
       var userContainer=document.getElementById('user')
 
       validateView.classList.toggle('show') 
-
+      console.log(validateView)
       userContainer.style.cssText=`justify-content: flex-end;display: flex;a lign-items: center;
       font-size: 13px;`
       userContainer.innerHTML=` 
