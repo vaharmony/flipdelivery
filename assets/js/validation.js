@@ -1,11 +1,13 @@
+ let validateView=document.getElementById('validation')
 
-
+openApp=()=>{
+  validateView.style.cssText=`display:none`
+}
  
 
   function validation(event,guser,gphoto){ 
     
       event.preventDefault() 
-      let validateView=document.getElementById('validation')
       
       var gname=guser
       var gnphoto=gphoto
@@ -28,12 +30,11 @@
           <img src=' `+gnphoto+` ' alt=''>
         </div>
       `
+
+      setTimeout(openApp, 2000);
+
       }
  
 
 
-// function initApp(){  
-//   setTimeout(function init(){ 
-//     document.getElementsByTagName('body')[0].style.cssText="overflow:auto;"
-//  }, 1000);
-// } 
+ 
