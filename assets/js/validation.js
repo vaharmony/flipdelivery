@@ -2,6 +2,8 @@
 
 openApp=()=>{
   validateView.style.cssText=`display:none`
+  console.log('t4',validateView)
+
 }
  
 
@@ -31,7 +33,7 @@ openApp=()=>{
         </div>
       `
 
-      setTimeout(openApp, 2000);
+      setTimeout(openApp(), 2000);
 
       }
  
