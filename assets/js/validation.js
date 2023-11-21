@@ -10,8 +10,8 @@
       var gname=guser
       var gnphoto=gphoto
       var userContainer=document.getElementById('user')
-
-      validateView.classList.toggle('show')
+ 
+      validateView.style.cssText=`display:none`
       console.log('t2',validateView)
       
       userContainer.style.cssText=`justify-content: flex-end;display: flex;a lign-items: center;
