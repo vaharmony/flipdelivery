@@ -11,8 +11,8 @@
       var gnphoto=gphoto
       var userContainer=document.getElementById('user')
  
-      validateView.style.cssText=`display:none`
-      console.log('t2',validateView)
+      // validateView.style.cssText=`display:none`
+      console.log('t3',validateView)
       
       userContainer.style.cssText=`justify-content: flex-end;display: flex;a lign-items: center;
       font-size: 13px;`
