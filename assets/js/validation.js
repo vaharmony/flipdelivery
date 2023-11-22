@@ -8,10 +8,10 @@
       
       var gname=guser
       var gnphoto=gphoto
-      var userContainer=document.getElementById('user')
- 
-      // validateView.style.cssText=`display:none`
-      console.log('t3',validateView)
+      var userContainer=document.getElementById('user') 
+      
+      console.log('validation',gname)
+    
       
       userContainer.style.cssText=`justify-content: flex-end;display: flex;a lign-items: center;
       font-size: 13px;`
@@ -27,9 +27,11 @@
           <img src=' `+gnphoto+` ' alt=''>
         </div>
       `
-      setTimeout(() => {
-           
-       if(gname){ validateView.style.cssText=`display:none`}
+      setTimeout(() => { 
+        if(gname){ 
+          console.log('oksetTimeout1',gname)
+          validateView.style.cssText=`display:none`
+        }
 
       }, 2000);
       

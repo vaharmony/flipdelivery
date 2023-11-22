@@ -246,12 +246,14 @@
     }).catch((error) => {})
   }
 
+  // VERIFICA USUÁRIO
   onAuthStateChanged(auth, (user) => {
-    console.log('tentou locar');
+    
 
     if(user) { 
       var guser=user.displayName 
       var gphoto=user.photoURL 
+      validation(event,guser,gphoto)
       
     } else {
       
