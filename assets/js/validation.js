@@ -27,17 +27,11 @@
           <img src=' `+gnphoto+` ' alt=''>
         </div>
       `
-      function resolverDepoisDe2Segundos(gnphoto) {
-        return new Promise((gnphoto) => {
-          setTimeout(() => {
+      setTimeout(() => {
            
-            validateView.style.cssText=`display:none`
+       if(gname){ validateView.style.cssText=`display:none`}
 
-          }, 2000);
-        });
-      }
-
-      resolverDepoisDe2Segundos(gnphoto) 
+      }, 2000);
       
  
       }
